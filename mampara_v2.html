@@ -1,0 +1,510 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>Mampara — ¿Qué tan seguro es lo que comemos?</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;900&family=Inter:wght@400;600&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0;}
+body{background:#e8e8e8;font-family:'Inter',sans-serif;padding:20px;}
+.print-note{background:#fff3cd;border:2px dashed #f0ad4e;border-radius:8px;padding:12px 18px;margin-bottom:20px;font-size:12px;color:#7a5100;text-align:center;}
+.print-note strong{display:block;font-size:14px;margin-bottom:3px;}
+@media print{body{background:white;padding:0;}.print-note{display:none;}.page{page-break-after:always;box-shadow:none;margin:0;}.page:last-child{page-break-after:avoid;}}
+
+/* ── PÁGINA (A3 landscape aprox) ── */
+.page{width:380mm;min-height:220mm;background:white;margin:0 auto 28px;border-radius:6px;overflow:hidden;box-shadow:0 3px 20px rgba(0,0,0,.15);display:flex;flex-direction:column;}
+
+/* ═══ HEADER ═══ */
+.pg-header{padding:18px 24px 14px;display:flex;align-items:center;gap:16px;}
+.pg-header h2{font-family:'Montserrat',sans-serif;font-size:22px;font-weight:900;color:white;line-height:1.15;margin-bottom:2px;}
+.pg-header p{font-size:11px;color:rgba(255,255,255,.7);}
+.pg-header .step-badge{background:rgba(255,255,255,.2);border:2px solid rgba(255,255,255,.5);border-radius:50%;width:56px;height:56px;display:flex;align-items:center;justify-content:center;font-size:26px;flex-shrink:0;}
+.pg-header .step-num{background:rgba(255,255,255,.15);border-radius:8px;padding:2px 10px;font-size:11px;font-weight:700;color:white;display:inline-block;margin-bottom:5px;letter-spacing:.06em;text-transform:uppercase;}
+
+/* ═══ LAYOUT ═══ */
+.body{flex:1;display:grid;gap:12px;padding:14px 18px 16px;}
+.cols2{grid-template-columns:1fr 1fr;}
+.cols3{grid-template-columns:1fr 1fr 1fr;}
+.cols4{grid-template-columns:repeat(4,1fr);}
+.cols5{grid-template-columns:repeat(5,1fr);}
+.cols2-3{grid-template-columns:1.1fr 1fr 1fr;}
+.cols1-2{grid-template-columns:1.2fr 1fr;}
+
+/* ═══ TARJETA GENÉRICA ═══ */
+.card{border-radius:10px;overflow:hidden;border:1.5px solid #e0e0e0;}
+.card-head{padding:8px 12px;font-family:'Montserrat',sans-serif;font-size:11px;font-weight:700;color:white;display:flex;align-items:center;gap:6px;}
+.card-head .ico{font-size:18px;}
+.card-body{padding:10px 12px;font-size:10.5px;line-height:1.55;color:#1a1a1a;background:white;}
+
+/* ═══ BIG STAT ═══ */
+.big-stat{display:flex;flex-direction:column;align-items:center;justify-content:center;border-radius:10px;padding:14px 10px;text-align:center;border:2px solid transparent;}
+.big-stat .ico{font-size:32px;margin-bottom:6px;line-height:1;}
+.big-stat .num{font-family:'Montserrat',sans-serif;font-size:28px;font-weight:900;line-height:1;margin-bottom:3px;}
+.big-stat .label{font-size:9.5px;font-weight:600;line-height:1.3;text-transform:uppercase;letter-spacing:.04em;}
+.big-stat .sub{font-size:9px;margin-top:3px;opacity:.7;}
+
+/* ═══ ICONO-CARD (para factores, grupos) ═══ */
+.ico-card{border-radius:10px;padding:10px 8px;text-align:center;border:1.5px solid transparent;}
+.ico-card .big-ico{font-size:30px;line-height:1;margin-bottom:6px;}
+.ico-card .name{font-family:'Montserrat',sans-serif;font-size:10px;font-weight:700;margin-bottom:3px;}
+.ico-card .desc{font-size:9.5px;line-height:1.4;color:#444;}
+.ico-card .tag{margin-top:5px;font-size:8.5px;font-weight:700;padding:2px 7px;border-radius:20px;display:inline-block;}
+
+/* ═══ TABLA MINI ═══ */
+.mini-table{width:100%;border-collapse:collapse;font-size:10px;}
+.mini-table th{font-family:'Montserrat',sans-serif;font-size:9.5px;font-weight:700;padding:6px 8px;text-align:left;text-transform:uppercase;letter-spacing:.04em;color:white;}
+.mini-table td{padding:6px 8px;border-bottom:1px solid #eee;line-height:1.4;vertical-align:top;}
+.mini-table tr:last-child td{border-bottom:none;}
+
+/* ═══ BARRA VISUAL ═══ */
+.bar-row{display:flex;align-items:center;gap:8px;margin-bottom:6px;}
+.bar-row .bl{font-size:9.5px;font-weight:600;min-width:130px;color:#333;}
+.bar-track{flex:1;height:10px;border-radius:5px;background:#eee;overflow:hidden;}
+.bar-fill{height:100%;border-radius:5px;}
+.bar-row .bv{font-size:9px;color:#888;min-width:70px;text-align:right;}
+
+/* ═══ TIMELINE HORIZONTAL ═══ */
+.timeline{display:flex;align-items:stretch;border-radius:8px;overflow:hidden;}
+.tl-step{flex:1;padding:8px 6px;text-align:center;display:flex;flex-direction:column;align-items:center;gap:3px;border-right:1px solid rgba(255,255,255,.2);}
+.tl-step:last-child{border-right:none;}
+.tl-ico{font-size:20px;line-height:1;}
+.tl-label{font-size:9px;font-weight:700;color:white;line-height:1.3;}
+.tl-sub{font-size:8.5px;color:rgba(255,255,255,.7);line-height:1.3;}
+
+/* ═══ QUOTE BANNER ═══ */
+.quote-banner{background:#FFF9C4;border-top:4px solid #F9A825;border-bottom:4px solid #F9A825;padding:10px 20px;text-align:center;}
+.quote-banner .q{font-family:'Montserrat',sans-serif;font-size:18px;font-weight:900;color:#1A237E;}
+.quote-banner .qa{font-size:10px;color:#7a5100;margin-top:2px;font-style:italic;}
+
+/* ═══ DATO IMPACTANTE ═══ */
+.dato{border-radius:10px;padding:10px 14px;display:flex;gap:12px;align-items:center;border:2px solid #F9A825;background:#FFFDE7;}
+.dato .di{font-size:34px;flex-shrink:0;line-height:1;}
+.dato .dl{font-family:'Montserrat',sans-serif;font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:#E65100;margin-bottom:2px;}
+.dato .dt{font-family:'Montserrat',sans-serif;font-size:11px;font-weight:700;color:#4A3000;margin-bottom:2px;}
+.dato .dd{font-size:10px;color:#5D4037;line-height:1.45;}
+
+/* ═══ SINERGIA CHIPS ═══ */
+.chips{display:flex;flex-wrap:wrap;gap:6px;margin-top:6px;}
+.chip{border-radius:20px;padding:4px 10px;font-size:9.5px;font-weight:700;border:1.5px solid transparent;}
+
+/* ═══ FOOTER ═══ */
+.pg-footer{padding:7px 20px;display:flex;justify-content:space-between;align-items:center;}
+.pg-footer span{font-size:9.5px;font-style:italic;}
+
+/* ═══ COLORES ═══ */
+.bg-azul   {background:#1F497D;}
+.bg-navy   {background:#1A237E;}
+.bg-verde  {background:#1B5E20;}
+.bg-purp   {background:#4A148C;}
+.bg-amber  {background:#C55A11;}
+.bg-rojo   {background:#B71C1C;}
+.text-azul {color:#1F497D;}
+.text-verde{color:#1B5E20;}
+.text-purp {color:#4A148C;}
+.text-amber{color:#C55A11;}
+
+.fill-azul-l  {background:#EBF2FA;}
+.fill-verde-l {background:#E8F5E9;}
+.fill-purp-l  {background:#F3E5F5;}
+.fill-amber-l {background:#FFF3E0;}
+.fill-red-l   {background:#FFEBEE;}
+.fill-gray    {background:#F5F5F5;}
+
+.border-azul  {border-color:#1F497D;}
+.border-verde {border-color:#1B5E20;}
+.border-purp  {border-color:#4A148C;}
+
+/* ═══ HEADER TIRAS DE PASO ═══ */
+.steps-strip{display:grid;grid-template-columns:repeat(4,1fr);background:#17375E;}
+.ss-item{padding:8px 14px;border-right:1px solid rgba(255,255,255,.1);display:flex;align-items:center;gap:8px;}
+.ss-item:last-child{border-right:none;}
+.ss-n{width:24px;height:24px;border-radius:50%;background:#C55A11;color:white;font-family:'Montserrat',sans-serif;font-size:12px;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+.ss-t{font-size:10px;color:rgba(255,255,255,.9);font-weight:600;line-height:1.2;}
+.ss-s{font-size:9px;color:rgba(255,255,255,.5);}
+</style>
+</head>
+<body>
+
+<div class="print-note">
+  <strong>🖨️ Imprimir en A3 o Tabloide · Horizontal · Alta calidad · Con color</strong>
+  4 hojas = 4 secciones de la mampara. Recortar y pegar de izquierda a derecha.
+</div>
+
+<!-- ══════════════════════════ HOJA 1 — HEADER + PASO 1 ══════════════════════════ -->
+<div class="page">
+  <div class="pg-header bg-azul">
+    <div style="flex:1">
+      <div class="step-num">Día Mundial de la Inocuidad Alimentaria</div>
+      <h2>¿Qué tan seguro es<br>lo que comemos?</h2>
+      <p>Evaluación de Riesgos por Agentes Químicos · Lic. Nutrición y Dietética</p>
+    </div>
+    <div style="display:flex;gap:10px;">
+      <div class="step-badge">🔬</div>
+      <div class="step-badge">🍽️</div>
+      <div class="step-badge">🛡️</div>
+    </div>
+  </div>
+
+  <div class="steps-strip">
+    <div class="ss-item"><div class="ss-n">1</div><div><div class="ss-t">Identificación del peligro</div><div class="ss-s">¿Qué puede dañar?</div></div></div>
+    <div class="ss-item"><div class="ss-n">2</div><div><div class="ss-t">Dosis-Respuesta</div><div class="ss-s">¿Cuánto daña?</div></div></div>
+    <div class="ss-item"><div class="ss-n">3</div><div><div class="ss-t">Evaluación Exposición</div><div class="ss-s">¿Quién y cuánto?</div></div></div>
+    <div class="ss-item"><div class="ss-n">4</div><div><div class="ss-t">Caracterización y Manejo</div><div class="ss-s">¿Hay riesgo real?</div></div></div>
+  </div>
+
+  <div class="body cols2-3" style="grid-template-columns:1fr 1.6fr 1fr;">
+
+    <!-- Stats -->
+    <div style="display:flex;flex-direction:column;gap:10px;">
+      <div class="big-stat fill-azul-l border-azul">
+        <div class="ico">☠️</div>
+        <div class="num text-azul">TÓXICO</div>
+        <div class="label text-azul">Sustancia que produce daño en un organismo vivo</div>
+        <div class="sub">La toxicidad = su capacidad de dañar</div>
+      </div>
+      <div class="big-stat fill-amber-l" style="border-color:#C55A11;">
+        <div class="ico">🧪</div>
+        <div class="num text-amber">XENOBIÓTICO</div>
+        <div class="label text-amber">Sustancia extraña al organismo</div>
+        <div class="sub">Natural o sintética · la clave es la dosis</div>
+      </div>
+    </div>
+
+    <!-- 4 tipos de tóxico -->
+    <div style="display:flex;flex-direction:column;gap:8px;">
+      <div style="font-family:'Montserrat',sans-serif;font-size:11px;font-weight:700;color:#1F497D;margin-bottom:2px;">⚠️ Tipos de peligro en los alimentos</div>
+      <div class="ico-card fill-verde-l border-verde" style="display:flex;align-items:center;gap:10px;text-align:left;padding:8px 12px;">
+        <div style="font-size:26px;">🌿</div>
+        <div><div class="name text-verde">Natural</div><div class="desc">Solanina (papa verde) · cianuro (almendra amarga) · histamina (pescado mal refrigerado)</div></div>
+      </div>
+      <div class="ico-card fill-amber-l" style="border-color:#C55A11;display:flex;align-items:center;gap:10px;text-align:left;padding:8px 12px;">
+        <div style="font-size:26px;">⚗️</div>
+        <div><div class="name text-amber">Químico</div><div class="desc">Plaguicidas · metales pesados · nitritos · aditivos en exceso · acrilamida</div></div>
+      </div>
+      <div class="ico-card fill-red-l" style="border-color:#B71C1C;display:flex;align-items:center;gap:10px;text-align:left;padding:8px 12px;">
+        <div style="font-size:26px;">🦠</div>
+        <div><div class="name" style="color:#B71C1C;">Biológico</div><div class="desc">Aflatoxinas (Aspergillus) · toxina botulínica · Salmonella · Listeria</div></div>
+      </div>
+      <div class="ico-card fill-azul-l border-azul" style="display:flex;align-items:center;gap:10px;text-align:left;padding:8px 12px;">
+        <div style="font-size:26px;">🌍</div>
+        <div><div class="name text-azul">Ambiental</div><div class="desc">Mercurio en peces · dioxinas en carnes · PCBs en suelos agrícolas contaminados</div></div>
+      </div>
+    </div>
+
+    <!-- Dato -->
+    <div style="display:flex;flex-direction:column;gap:10px;justify-content:center;">
+      <div class="dato" style="flex-direction:column;text-align:center;padding:14px;">
+        <div class="di">💡</div>
+        <div class="dl">¡Dato impactante!</div>
+        <div class="dt">Las papas muy doradas producen un cancerígeno EN TU COCINA</div>
+        <div class="dd">La acrilamida se forma al calentar almidón a más de 120°C. No es un aditivo industrial.</div>
+      </div>
+      <div style="background:#1F497D;border-radius:10px;padding:10px 12px;text-align:center;">
+        <div style="font-size:22px;margin-bottom:4px;">🚨</div>
+        <div style="font-family:'Montserrat',sans-serif;font-size:10px;font-weight:700;color:white;margin-bottom:3px;">CONTAMINACIÓN INVISIBLE</div>
+        <div style="font-size:9.5px;color:rgba(255,255,255,.8);line-height:1.4;">Un alimento puede verse y oler bien y contener niveles tóxicos. No podemos confiar solo en los sentidos.</div>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="pg-footer bg-azul"><span style="color:rgba(255,255,255,.7);">Sección 1 · Identificación del Peligro</span><span style="color:rgba(255,255,255,.7);">Toxicología de los Alimentos · Feria Educativa Interactiva</span></div>
+</div>
+
+
+<!-- ══════════════════════════ HOJA 2 — PASO 2: DOSIS-RESPUESTA + DL50 ══════════════════════════ -->
+<div class="page">
+  <div class="pg-header bg-navy">
+    <div class="step-badge">⚖️</div>
+    <div>
+      <div class="step-num">Paso 2</div>
+      <h2>Dosis-Respuesta &amp; DL50</h2>
+      <p>¿Cuánto hace el daño? · Estudiante 2</p>
+    </div>
+  </div>
+
+  <div class="quote-banner">
+    <div class="q">"La dosis hace el veneno" &nbsp;—&nbsp; Paracelso, s. XVI</div>
+    <div class="qa">Cualquier sustancia puede ser tóxica en dosis alta · y prácticamente segura en dosis baja</div>
+  </div>
+
+  <div class="body" style="grid-template-columns:1.3fr 1fr;gap:14px;">
+    <div style="display:flex;flex-direction:column;gap:10px;">
+
+      <div style="font-family:'Montserrat',sans-serif;font-size:11px;font-weight:700;color:#1A237E;margin-bottom:2px;">📊 DL50 — Dosis Letal 50 (mg/kg) · Menor = Más tóxico</div>
+
+      <div class="bar-row"><span class="bl">☠️ Toxina botulínica</span><div class="bar-track"><div class="bar-fill" style="width:100%;background:#B71C1C;"></div></div><span class="bv" style="color:#B71C1C;font-weight:700;">0.001 mg/kg</span></div>
+      <div class="bar-row"><span class="bl">🌽 Aflatoxina B1</span><div class="bar-track"><div class="bar-fill" style="width:88%;background:#E53935;"></div></div><span class="bv" style="color:#E53935;font-weight:700;">0.3 mg/kg</span></div>
+      <div class="bar-row"><span class="bl">🌿 Paraquat (plaguicida)</span><div class="bar-track"><div class="bar-fill" style="width:70%;background:#F44336;"></div></div><span class="bv" style="color:#F44336;font-weight:600;">22 mg/kg</span></div>
+      <div class="bar-row"><span class="bl">🍟 Acrilamida</span><div class="bar-track"><div class="bar-fill" style="width:42%;background:#FF9800;"></div></div><span class="bv" style="color:#FF9800;font-weight:600;">~150 mg/kg</span></div>
+      <div class="bar-row"><span class="bl">🧂 Sal de mesa (NaCl)</span><div class="bar-track"><div class="bar-fill" style="width:10%;background:#4CAF50;"></div></div><span class="bv" style="color:#4CAF50;font-weight:600;">3,000 mg/kg</span></div>
+      <div class="bar-row"><span class="bl">🍬 Azúcar (sacarosa)</span><div class="bar-track"><div class="bar-fill" style="width:2%;background:#1B5E20;"></div></div><span class="bv" style="color:#1B5E20;font-weight:600;">29,700 mg/kg</span></div>
+
+      <table class="mini-table" style="margin-top:4px;">
+        <thead><tr style="background:#1A237E;"><th>Cat.</th><th>Clasificación OMS</th><th>DL50</th></tr></thead>
+        <tbody>
+          <tr><td style="background:#FFCDD2;font-weight:700;color:#B71C1C;">Ia</td><td style="background:#FFCDD2;color:#B71C1C;">Extremadamente tóxico</td><td style="background:#FFCDD2;">&lt; 5</td></tr>
+          <tr><td style="background:#FFCCBC;font-weight:700;color:#BF360C;">Ib</td><td style="background:#FFCCBC;color:#BF360C;">Altamente tóxico</td><td style="background:#FFCCBC;">5–50</td></tr>
+          <tr><td style="background:#FFF9C4;font-weight:700;color:#F57F17;">II</td><td style="background:#FFF9C4;color:#F57F17;">Moderadamente tóxico</td><td style="background:#FFF9C4;">50–500</td></tr>
+          <tr><td style="background:#F1F8E9;font-weight:700;color:#33691E;">III</td><td style="background:#F1F8E9;color:#33691E;">Ligeramente tóxico</td><td style="background:#F1F8E9;">500–2,000</td></tr>
+          <tr><td style="background:#E8F5E9;font-weight:700;color:#1B5E20;">IV</td><td style="background:#E8F5E9;color:#1B5E20;">Prácticamente no tóxico</td><td style="background:#E8F5E9;">&gt; 2,000</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div style="display:flex;flex-direction:column;gap:10px;">
+      <!-- Aguda vs Crónica visual -->
+      <div style="font-family:'Montserrat',sans-serif;font-size:11px;font-weight:700;color:#1A237E;">🆚 Toxicidad Aguda vs. Crónica</div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;">
+        <div style="background:#FFF3E0;border-radius:10px;padding:12px;border:2px solid #FF9800;text-align:center;">
+          <div style="font-size:28px;margin-bottom:6px;">⚡</div>
+          <div style="font-family:'Montserrat',sans-serif;font-size:11px;font-weight:700;color:#E65100;margin-bottom:6px;">AGUDA</div>
+          <div style="font-size:9.5px;color:#333;line-height:1.5;">Exposición única o corta<br>Síntomas en horas<br>Náuseas, colapso<br><strong>Ej: intoxicación por<br>organofosforado</strong></div>
+        </div>
+        <div style="background:#E8EAF6;border-radius:10px;padding:12px;border:2px solid #5C6BC0;text-align:center;">
+          <div style="font-size:28px;margin-bottom:6px;">🐢</div>
+          <div style="font-family:'Montserrat',sans-serif;font-size:11px;font-weight:700;color:#283593;margin-bottom:6px;">CRÓNICA</div>
+          <div style="font-size:9.5px;color:#333;line-height:1.5;">Exposición prolongada<br>Síntomas en años<br>Cáncer, daño neurológico<br><strong>Ej: aflatoxinas diarias<br>en maíz contaminado</strong></div>
+        </div>
+      </div>
+
+      <div class="dato">
+        <div class="di">☠️</div>
+        <div>
+          <div class="dl">Dato impactante</div>
+          <div class="dt">La botulina es 3,000,000× más tóxica que la sal</div>
+          <div class="dd">Misma unidad (mg/kg) — mundos distintos de peligro. Puede formarse en conservas caseras mal esterilizadas.</div>
+        </div>
+      </div>
+
+      <div style="background:#1A237E;border-radius:10px;padding:10px 14px;">
+        <div style="font-family:'Montserrat',sans-serif;font-size:11px;font-weight:700;color:#90CAF9;margin-bottom:4px;">🎯 REGLA CLAVE</div>
+        <div style="font-size:10px;color:rgba(255,255,255,.85);line-height:1.5;">El umbral de la dosis-respuesta es la base para fijar los <strong style="color:white;">LMR</strong> (Límites Máximos de Residuos) en alimentos. Por debajo del umbral → sin efecto adverso observable.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="pg-footer bg-navy"><span style="color:rgba(255,255,255,.7);">Sección 2 · Dosis-Respuesta y DL50</span><span style="color:rgba(255,255,255,.7);">Toxicología de los Alimentos · Feria Educativa Interactiva</span></div>
+</div>
+
+
+<!-- ══════════════════════════ HOJA 3 — PASO 3: EXPOSICIÓN ══════════════════════════ -->
+<div class="page">
+  <div class="pg-header bg-verde">
+    <div class="step-badge">👤</div>
+    <div>
+      <div class="step-num">Paso 3</div>
+      <h2>Evaluación de la Exposición</h2>
+      <p>¿Quién come qué, cuánto y con qué frecuencia? · Estudiante 3</p>
+    </div>
+  </div>
+
+  <div style="background:#E8F5E9;border-bottom:2px solid #4CAF50;padding:8px 20px;text-align:center;">
+    <span style="font-family:'Montserrat',sans-serif;font-size:13px;font-weight:700;color:#1B5E20;">No basta que el peligro exista — importa <em>cuánto, quién y con qué frecuencia</em> está expuesto</span>
+  </div>
+
+  <div class="body" style="grid-template-columns:1fr 1fr;gap:14px;">
+    <!-- 5 factores -->
+    <div>
+      <div style="font-family:'Montserrat',sans-serif;font-size:11px;font-weight:700;color:#1B5E20;margin-bottom:8px;">⚙️ 5 Factores que modifican la exposición</div>
+      <div style="display:grid;grid-template-columns:repeat(5,1fr);gap:6px;margin-bottom:10px;">
+        <div class="ico-card fill-verde-l border-verde">
+          <div class="big-ico">💊</div>
+          <div class="name text-verde">Dosis</div>
+          <div class="desc">Cantidad ingerida por exposición</div>
+        </div>
+        <div class="ico-card fill-verde-l border-verde">
+          <div class="big-ico">🔁</div>
+          <div class="name text-verde">Frecuencia</div>
+          <div class="desc">¿Cada cuánto lo consume?</div>
+        </div>
+        <div class="ico-card fill-verde-l border-verde">
+          <div class="big-ico">👶</div>
+          <div class="name text-verde">Edad</div>
+          <div class="desc">Madurez del sistema de detox</div>
+        </div>
+        <div class="ico-card fill-verde-l border-verde">
+          <div class="big-ico">⚖️</div>
+          <div class="name text-verde">Peso</div>
+          <div class="desc">Menor peso = mayor dosis/kg</div>
+        </div>
+        <div class="ico-card fill-verde-l border-verde">
+          <div class="big-ico">🥗</div>
+          <div class="name text-verde">Nutrición</div>
+          <div class="desc">Déficits amplifican el daño</div>
+        </div>
+      </div>
+
+      <!-- Comparativa visual niño vs adulto -->
+      <div style="background:#1B5E20;border-radius:10px;padding:12px 14px;">
+        <div style="font-family:'Montserrat',sans-serif;font-size:11px;font-weight:700;color:white;margin-bottom:8px;">⚖️ Ejemplo: misma ración · dosis diferente</div>
+        <div style="display:grid;grid-template-columns:1fr auto 1fr;gap:8px;align-items:center;">
+          <div style="background:rgba(255,255,255,.15);border-radius:8px;padding:10px;text-align:center;">
+            <div style="font-size:32px;margin-bottom:4px;">👦</div>
+            <div style="font-family:'Montserrat',sans-serif;font-size:13px;font-weight:900;color:#A5D6A7;">20 kg</div>
+            <div style="font-size:9px;color:rgba(255,255,255,.8);">Niño</div>
+            <div style="margin-top:6px;background:#FFCDD2;border-radius:6px;padding:4px 6px;font-family:'Montserrat',sans-serif;font-size:11px;font-weight:700;color:#B71C1C;">3.5× MÁS DOSIS</div>
+          </div>
+          <div style="font-family:'Montserrat',sans-serif;font-size:18px;font-weight:900;color:rgba(255,255,255,.4);">vs</div>
+          <div style="background:rgba(255,255,255,.15);border-radius:8px;padding:10px;text-align:center;">
+            <div style="font-size:32px;margin-bottom:4px;">🧑</div>
+            <div style="font-family:'Montserrat',sans-serif;font-size:13px;font-weight:900;color:#A5D6A7;">70 kg</div>
+            <div style="font-size:9px;color:rgba(255,255,255,.8);">Adulto</div>
+            <div style="margin-top:6px;background:#E8F5E9;border-radius:6px;padding:4px 6px;font-family:'Montserrat',sans-serif;font-size:11px;font-weight:700;color:#1B5E20;">dosis base</div>
+          </div>
+        </div>
+        <div style="font-size:9.5px;color:rgba(255,255,255,.7);text-align:center;margin-top:6px;">Comiendo exactamente la misma ración</div>
+      </div>
+    </div>
+
+    <!-- Grupos vulnerables -->
+    <div>
+      <div style="font-family:'Montserrat',sans-serif;font-size:11px;font-weight:700;color:#B71C1C;margin-bottom:8px;">🚨 Grupos más vulnerables</div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:10px;">
+        <div class="ico-card" style="background:#EDE7F6;border:2px solid #7B1FA2;padding:12px;">
+          <div class="big-ico">👶</div>
+          <div class="name" style="color:#4A148C;">Niños &lt; 5 años</div>
+          <div class="desc">SNC en desarrollo · mayor absorción · menor detoxificación hepática</div>
+          <div class="tag" style="background:#EDE7F6;color:#4A148C;border:1px solid #7B1FA2;">Plomo · mercurio · pesticidas</div>
+        </div>
+        <div class="ico-card" style="background:#FCE4EC;border:2px solid #C2185B;padding:12px;">
+          <div class="big-ico">🤰</div>
+          <div class="name" style="color:#880E4F;">Embarazadas</div>
+          <div class="desc">El tóxico cruza la barrera placentaria → afecta al feto directamente</div>
+          <div class="tag" style="background:#FCE4EC;color:#880E4F;border:1px solid #C2185B;">Mercurio · listeria · aflatoxinas</div>
+        </div>
+        <div class="ico-card" style="background:#E3F2FD;border:2px solid #1565C0;padding:12px;">
+          <div class="big-ico">👴</div>
+          <div class="name" style="color:#0D47A1;">Adultos mayores</div>
+          <div class="desc">Menor función renal y hepática → eliminación más lenta de tóxicos</div>
+          <div class="tag" style="background:#E3F2FD;color:#0D47A1;border:1px solid #1565C0;">Metales pesados · micotoxinas</div>
+        </div>
+        <div class="ico-card" style="background:#FFF3E0;border:2px solid #E65100;padding:12px;">
+          <div class="big-ico">😔</div>
+          <div class="name" style="color:#BF360C;">Desnutridos</div>
+          <div class="desc">Déficits enzimáticos y de micronutrientes reducen detoxificación</div>
+          <div class="tag" style="background:#FFF3E0;color:#BF360C;border:1px solid #E65100;">Todos los tóxicos amplificados</div>
+        </div>
+      </div>
+
+      <div class="dato">
+        <div class="di">🐟</div>
+        <div>
+          <div class="dl">Biomagnificación</div>
+          <div class="dt">El atún concentra el mercurio de miles de peces</div>
+          <div class="dd">Cada eslabón de la cadena alimentaria concentra el mercurio ×10. Un atún puede tener 100,000× más Hg que el agua donde nada.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="pg-footer bg-verde"><span style="color:rgba(255,255,255,.7);">Sección 3 · Evaluación de la Exposición</span><span style="color:rgba(255,255,255,.7);">Toxicología de los Alimentos · Feria Educativa Interactiva</span></div>
+</div>
+
+
+<!-- ══════════════════════════ HOJA 4 — PASO 4 + CONTAMINANTES + CASO ══════════════════════════ -->
+<div class="page">
+  <div class="pg-header bg-purp">
+    <div class="step-badge">🛡️</div>
+    <div>
+      <div class="step-num">Paso 4 · Contaminantes · Caso Práctico</div>
+      <h2>Caracterización del Riesgo<br>+ Los 5 Contaminantes Clave</h2>
+      <p>Estudiante 4</p>
+    </div>
+  </div>
+
+  <div class="body" style="grid-template-columns:1fr 1.6fr;gap:14px;">
+
+    <!-- Columna izq: caracterización + sinergia -->
+    <div style="display:flex;flex-direction:column;gap:10px;">
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;">
+        <div style="background:#F3E5F5;border:2px solid #7B1FA2;border-radius:10px;padding:10px;text-align:center;">
+          <div style="font-size:26px;margin-bottom:5px;">🔍</div>
+          <div style="font-family:'Montserrat',sans-serif;font-size:10px;font-weight:700;color:#4A148C;margin-bottom:4px;">CARACTERIZACIÓN</div>
+          <div style="font-size:9.5px;color:#333;line-height:1.4;">Integra los 3 pasos para estimar la <strong>probabilidad real</strong> de daño para esa persona</div>
+        </div>
+        <div style="background:#F3E5F5;border:2px solid #7B1FA2;border-radius:10px;padding:10px;text-align:center;">
+          <div style="font-size:26px;margin-bottom:5px;">⚙️</div>
+          <div style="font-family:'Montserrat',sans-serif;font-size:10px;font-weight:700;color:#4A148C;margin-bottom:4px;">MANEJO</div>
+          <div style="font-size:9.5px;color:#333;line-height:1.4;"><strong>LMR</strong> · regulación · VETA · educación nutricional · recomendaciones</div>
+        </div>
+      </div>
+
+      <!-- Sinergia -->
+      <div style="background:#FFF3E0;border:2px solid #FF9800;border-radius:10px;padding:10px 12px;">
+        <div style="font-family:'Montserrat',sans-serif;font-size:11px;font-weight:700;color:#E65100;margin-bottom:5px;">⚡ Sinergia Tóxica · 1+1 puede ser =10</div>
+        <div style="font-size:9.5px;color:#5D4037;margin-bottom:7px;">Dos sustancias juntas producen <strong>más daño</strong> que la suma de sus efectos individuales</div>
+        <div style="display:flex;flex-direction:column;gap:5px;">
+          <div style="background:white;border-radius:7px;padding:5px 8px;display:flex;align-items:center;gap:8px;border:1px solid #FFCC80;">
+            <span style="font-size:16px;">🍺+🌽</span>
+            <span style="font-size:9.5px;color:#BF360C;font-weight:600;">Alcohol + Aflatoxinas → Mayor daño hepático</span>
+          </div>
+          <div style="background:white;border-radius:7px;padding:5px 8px;display:flex;align-items:center;gap:8px;border:1px solid #FFCC80;">
+            <span style="font-size:16px;">🚬+🥩</span>
+            <span style="font-size:9.5px;color:#BF360C;font-weight:600;">Tabaco + Nitrosaminas → Mayor carcinogénesis</span>
+          </div>
+          <div style="background:white;border-radius:7px;padding:5px 8px;display:flex;align-items:center;gap:8px;border:1px solid #FFCC80;">
+            <span style="font-size:16px;">🌿+🌿</span>
+            <span style="font-size:9.5px;color:#BF360C;font-weight:600;">Plaguicidas múltiples → Toxicidad acumulativa</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Caso práctico -->
+      <div style="background:#EBF2FA;border:2px solid #1F497D;border-radius:10px;padding:10px 12px;">
+        <div style="font-family:'Montserrat',sans-serif;font-size:10px;font-weight:700;color:#1F497D;margin-bottom:6px;">📋 Caso Práctico: El agricultor</div>
+        <div class="timeline" style="border-radius:8px;overflow:hidden;margin-bottom:6px;">
+          <div class="tl-step bg-azul"><div class="tl-ico">🌿</div><div class="tl-label">Lunes</div><div class="tl-sub">Plaguicida</div></div>
+          <div class="tl-step" style="background:#17375E;"><div class="tl-ico">⏳</div><div class="tl-label">3 días</div><div class="tl-sub">de 14</div></div>
+          <div class="tl-step bg-azul"><div class="tl-ico">🍅</div><div class="tl-label">Jueves</div><div class="tl-sub">Cosecha</div></div>
+          <div class="tl-step" style="background:#17375E;"><div class="tl-ico">🏪</div><div class="tl-label">Viernes</div><div class="tl-sub">Mercado</div></div>
+          <div class="tl-step" style="background:#B71C1C;"><div class="tl-ico">⚠️</div><div class="tl-label">LMR</div><div class="tl-sub">superado</div></div>
+        </div>
+        <div style="font-size:9.5px;color:#1a1a1a;line-height:1.5;"><strong style="color:#B71C1C;">Síntomas:</strong> miosis · salivación · náuseas<br><strong style="color:#1F497D;">Biomarcador:</strong> colinesterasa sérica ↓<br><strong style="color:#1B5E20;">Acción:</strong> Notificar VETA · Formulario IAPs · Orientar BPA</div>
+      </div>
+    </div>
+
+    <!-- Columna der: 5 contaminantes -->
+    <div>
+      <div style="font-family:'Montserrat',sans-serif;font-size:11px;font-weight:700;color:#C55A11;background:#FCE4D6;padding:6px 12px;border-radius:8px;margin-bottom:8px;">🧪 Los 5 Contaminantes que todo nutricionista debe conocer</div>
+      <div style="display:flex;flex-direction:column;gap:7px;">
+        <div style="display:grid;grid-template-columns:36px 1fr 1fr 1fr;gap:0;border-radius:8px;overflow:hidden;border:1.5px solid #e0e0e0;">
+          <div style="background:#C55A11;display:flex;align-items:center;justify-content:center;padding:8px;font-size:22px;">🥩</div>
+          <div style="padding:6px 8px;background:#FFF8F5;"><div style="font-family:'Montserrat',sans-serif;font-size:10px;font-weight:700;color:#C55A11;">Nitrosaminas</div><div style="font-size:9px;color:#555;">Embutidos, carnes curadas</div></div>
+          <div style="padding:6px 8px;background:#FFEBEE;"><div style="font-size:9px;font-weight:600;color:#B71C1C;">Cancerígeno digestivo Gr.2A</div><div style="font-size:8.5px;color:#888;">Potenciado por tabaco</div></div>
+          <div style="padding:6px 8px;background:#E8F5E9;font-size:9px;color:#1B5E20;">Consumo ocasional. No quemar.</div>
+        </div>
+        <div style="display:grid;grid-template-columns:36px 1fr 1fr 1fr;gap:0;border-radius:8px;overflow:hidden;border:1.5px solid #e0e0e0;">
+          <div style="background:#E65100;display:flex;align-items:center;justify-content:center;padding:8px;font-size:22px;">🍟</div>
+          <div style="padding:6px 8px;background:#FFF8F5;"><div style="font-family:'Montserrat',sans-serif;font-size:10px;font-weight:700;color:#E65100;">Acrilamida</div><div style="font-size:9px;color:#555;">Papas, pan, galletas &gt;120°C</div></div>
+          <div style="padding:6px 8px;background:#FFF3E0;"><div style="font-size:9px;font-weight:600;color:#E65100;">Mutágeno · Gr.2A IARC</div><div style="font-size:8.5px;color:#888;">Se forma en tu cocina</div></div>
+          <div style="padding:6px 8px;background:#E8F5E9;font-size:9px;color:#1B5E20;">Freír a menor T°. Evitar dorado oscuro.</div>
+        </div>
+        <div style="display:grid;grid-template-columns:36px 1fr 1fr 1fr;gap:0;border-radius:8px;overflow:hidden;border:1.5px solid #e0e0e0;">
+          <div style="background:#F9A825;display:flex;align-items:center;justify-content:center;padding:8px;font-size:22px;">🌽</div>
+          <div style="padding:6px 8px;background:#FFF8F5;"><div style="font-family:'Montserrat',sans-serif;font-size:10px;font-weight:700;color:#F57F17;">Aflatoxinas B1</div><div style="font-size:9px;color:#555;">Maíz, maní, cereales húmedos</div></div>
+          <div style="padding:6px 8px;background:#FFEBEE;"><div style="font-size:9px;font-weight:600;color:#B71C1C;">Cancerígeno Gr.1 IARC 🔴</div><div style="font-size:8.5px;color:#888;">NO se elimina cocinando</div></div>
+          <div style="padding:6px 8px;background:#E8F5E9;font-size:9px;color:#1B5E20;">Desechar si hay moho. Almacenar en seco.</div>
+        </div>
+        <div style="display:grid;grid-template-columns:36px 1fr 1fr 1fr;gap:0;border-radius:8px;overflow:hidden;border:1.5px solid #e0e0e0;">
+          <div style="background:#388E3C;display:flex;align-items:center;justify-content:center;padding:8px;font-size:22px;">🌿</div>
+          <div style="padding:6px 8px;background:#FFF8F5;"><div style="font-family:'Montserrat',sans-serif;font-size:10px;font-weight:700;color:#2E7D32;">Plaguicidas</div><div style="font-size:9px;color:#555;">Frutas/verduras sin carencia</div></div>
+          <div style="padding:6px 8px;background:#FFF3E0;"><div style="font-size:9px;font-weight:600;color:#E65100;">Inhiben colinesterasa</div><div style="font-size:8.5px;color:#888;">Aguda: miosis, náuseas</div></div>
+          <div style="padding:6px 8px;background:#E8F5E9;font-size:9px;color:#1B5E20;">Lavar + pelar. Exigir BPA.</div>
+        </div>
+        <div style="display:grid;grid-template-columns:36px 1fr 1fr 1fr;gap:0;border-radius:8px;overflow:hidden;border:1.5px solid #e0e0e0;">
+          <div style="background:#1565C0;display:flex;align-items:center;justify-content:center;padding:8px;font-size:22px;">🐟</div>
+          <div style="padding:6px 8px;background:#FFF8F5;"><div style="font-family:'Montserrat',sans-serif;font-size:10px;font-weight:700;color:#0D47A1;">Mercurio orgánico</div><div style="font-size:9px;color:#555;">Atún, pez espada, tiburón</div></div>
+          <div style="padding:6px 8px;background:#FFEBEE;"><div style="font-size:9px;font-weight:600;color:#B71C1C;">Cruza placenta 🤰</div><div style="font-size:8.5px;color:#888;">Daño neurológico fetal</div></div>
+          <div style="padding:6px 8px;background:#E8F5E9;font-size:9px;color:#1B5E20;">Emb./niños: máx. 2×/sem. Preferir sardinas.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="pg-footer bg-purp"><span style="color:rgba(255,255,255,.7);">Sección 4 · Caracterización, Contaminantes y Caso Práctico</span><span style="color:rgba(255,255,255,.7);">Toxicología de los Alimentos · Feria Educativa Interactiva</span></div>
+</div>
+
+</body>
+</html>
