@@ -233,7 +233,8 @@ input[type=range]{flex:1;height:4px;accent-color:var(--blue-400);cursor:pointer;
     <div class="detail-inner">
       <div class="detail-title">¿Qué hacemos en este paso?</div>
       <div class="detail-text">Determinamos qué agentes químicos en los alimentos tienen capacidad de causar daño. Se identifican contaminantes naturales, residuos de plaguicidas, aditivos o compuestos formados durante el procesamiento.</div>
-      <div class="detail-example"><strong>Ejemplos:</strong> 🥩 nitrosaminas en embutidos · 🍟 acrilamida en papas fritas · 🔥 benzopirenos en carnes a la brasa · 🌽 aflatoxinas en maíz mal almacenado · 🌿 plaguicidas organofosforados en vegetales</div>
+      <div class="detail-example"><strong>Tipos de peligro:</strong> 🌿 Natural (solanina en papa verde · cianuro en almendras amargas · histamina en pescado no refrigerado) · ⚗️ Químico (plaguicidas · metales pesados · nitrosaminas en embutidos) · 🦠 Biológico (aflatoxinas por Aspergillus · toxina botulínica · enterotoxina estafilocócica) · 🌍 Ambiental (mercurio en pescados · dioxinas en carnes · PCBs en suelo agrícola)</div>
+      <div class="detail-example" style="margin-top:8px;"><strong>🚀 Vías de exposición:</strong> La vía principal en toxicología alimentaria es la <strong>ingestión</strong>. También puede haber exposición por <strong>inhalación</strong> (vapores durante la cocción) y por <strong>contacto dérmico</strong> (manipulación de alimentos tratados con plaguicidas). Conocer la vía determina qué órganos se afectan primero.</div>
     </div>
   </div>
 
@@ -245,7 +246,37 @@ input[type=range]{flex:1;height:4px;accent-color:var(--blue-400);cursor:pointer;
     <div class="detail-inner">
       <div class="detail-title">Relación entre dosis y toxicidad</div>
       <div class="detail-text">A mayor dosis, mayor efecto tóxico. La DL50 (Dosis Letal 50) es la dosis que causa la muerte al 50% de una población animal en condiciones controladas. A menor DL50, mayor toxicidad.</div>
-      <div class="detail-example"><strong>Comparativa:</strong> 🦠 Botulina = 0.001 mg/kg · 🌽 Aflatoxina B1 = 0.3 mg/kg · 🍟 Acrilamida = 150 mg/kg · 🧂 Sal común = 3,000 mg/kg · 🍬 Azúcar = 29,700 mg/kg</div>
+      <div class="detail-example"><strong>Comparativa DL50:</strong> ☠️ Botulina = 0.001 mg/kg · 🌽 Aflatoxina B1 = 0.3 mg/kg · 🍟 Acrilamida = ~150 mg/kg · 🧂 Sal de mesa = 3 000 mg/kg · 🍬 Azúcar = 29 700 mg/kg<br><br><strong>Categorías OMS:</strong> Ia (&lt;5 mg/kg) Extremadamente tóxico · Ib (5–50) Altamente tóxico · II (50–500) Moderado · III (500–2 000) Leve · IV (&gt;2 000) Prácticamente no tóxico</div>
+      <div class="detail-example" style="margin-top:8px;">
+        <strong>⚡ Aguda vs. 🐢 Crónica</strong>
+        <table style="width:100%;border-collapse:collapse;font-size:12px;margin-top:6px;">
+          <tr style="background:#E6F1FB;">
+            <th style="padding:5px 8px;text-align:left;border:1px solid #d0d0d0;"></th>
+            <th style="padding:5px 8px;text-align:left;border:1px solid #d0d0d0;">Toxicidad aguda ⚡</th>
+            <th style="padding:5px 8px;text-align:left;border:1px solid #d0d0d0;">Toxicidad crónica 🐢</th>
+          </tr>
+          <tr>
+            <td style="padding:5px 8px;border:1px solid #e0e0e0;font-weight:600;">Exposición</td>
+            <td style="padding:5px 8px;border:1px solid #e0e0e0;">Corta (una vez o pocos días)</td>
+            <td style="padding:5px 8px;border:1px solid #e0e0e0;">Prolongada (meses o años a dosis bajas)</td>
+          </tr>
+          <tr style="background:#f9f9f9;">
+            <td style="padding:5px 8px;border:1px solid #e0e0e0;font-weight:600;">Síntomas</td>
+            <td style="padding:5px 8px;border:1px solid #e0e0e0;">Horas o primeras 48 h</td>
+            <td style="padding:5px 8px;border:1px solid #e0e0e0;">Años después — silenciosa</td>
+          </tr>
+          <tr>
+            <td style="padding:5px 8px;border:1px solid #e0e0e0;font-weight:600;">Efecto</td>
+            <td style="padding:5px 8px;border:1px solid #e0e0e0;">Náuseas, vómitos, colapso, muerte</td>
+            <td style="padding:5px 8px;border:1px solid #e0e0e0;">Cáncer, daño neurológico, trastornos reproductivos</td>
+          </tr>
+          <tr style="background:#f9f9f9;">
+            <td style="padding:5px 8px;border:1px solid #e0e0e0;font-weight:600;">Ejemplo</td>
+            <td style="padding:5px 8px;border:1px solid #e0e0e0;">Intoxicación por organofosforado en cosecha</td>
+            <td style="padding:5px 8px;border:1px solid #e0e0e0;">Consumo diario de aflatoxinas en maíz contaminado</td>
+          </tr>
+        </table>
+      </div>
     </div>
   </div>
 
@@ -257,7 +288,34 @@ input[type=range]{flex:1;height:4px;accent-color:var(--blue-400);cursor:pointer;
     <div class="detail-inner">
       <div class="detail-title">Factores que modifican la exposición</div>
       <div class="detail-text">No basta que el peligro exista. Debemos saber cuánto tóxico ingiere una persona real, con qué frecuencia, durante cuánto tiempo y sus características individuales: edad, peso, estado nutricional.</div>
-      <div class="detail-example"><strong>Clave:</strong> 👦 Un niño de 20 kg recibe 3.5× más dosis por kg que un adulto de 70 kg comiendo la misma ración. Los niños son más vulnerables a plomo, pesticidas y metales pesados porque su sistema nervioso aún se desarrolla.</div>
+      <div class="detail-example">
+        <strong>⚙️ Los 5 factores que modifican la exposición:</strong>
+        <table style="width:100%;border-collapse:collapse;font-size:12px;margin-top:6px;">
+          <tr style="background:#E6F1FB;">
+            <th style="padding:5px 8px;border:1px solid #d0d0d0;">#</th>
+            <th style="padding:5px 8px;border:1px solid #d0d0d0;">Factor</th>
+            <th style="padding:5px 8px;border:1px solid #d0d0d0;">¿Qué significa?</th>
+            <th style="padding:5px 8px;border:1px solid #d0d0d0;">Ejemplo práctico</th>
+          </tr>
+          <tr><td style="padding:5px 8px;border:1px solid #e0e0e0;text-align:center;font-weight:700;">1</td><td style="padding:5px 8px;border:1px solid #e0e0e0;font-weight:600;">💊 Dosis</td><td style="padding:5px 8px;border:1px solid #e0e0e0;">Cantidad que entra al organismo por exposición</td><td style="padding:5px 8px;border:1px solid #e0e0e0;">50 g de maíz contaminado ≠ 500 g del mismo</td></tr>
+          <tr style="background:#f9f9f9;"><td style="padding:5px 8px;border:1px solid #e0e0e0;text-align:center;font-weight:700;">2</td><td style="padding:5px 8px;border:1px solid #e0e0e0;font-weight:600;">🔁 Frecuencia</td><td style="padding:5px 8px;border:1px solid #e0e0e0;">Con qué regularidad se consume el alimento</td><td style="padding:5px 8px;border:1px solid #e0e0e0;">Embutidos ocasional (bajo riesgo) vs. diario (acumulativo)</td></tr>
+          <tr><td style="padding:5px 8px;border:1px solid #e0e0e0;text-align:center;font-weight:700;">3</td><td style="padding:5px 8px;border:1px solid #e0e0e0;font-weight:600;">👶 Edad</td><td style="padding:5px 8px;border:1px solid #e0e0e0;">Madurez del sistema de detoxificación</td><td style="padding:5px 8px;border:1px solid #e0e0e0;">Niños: más vulnerables por SNC en desarrollo</td></tr>
+          <tr style="background:#f9f9f9;"><td style="padding:5px 8px;border:1px solid #e0e0e0;text-align:center;font-weight:700;">4</td><td style="padding:5px 8px;border:1px solid #e0e0e0;font-weight:600;">⚖️ Peso</td><td style="padding:5px 8px;border:1px solid #e0e0e0;">A menor peso, mayor dosis/kg ingerida</td><td style="padding:5px 8px;border:1px solid #e0e0e0;">Niño 20 kg recibe 3.5× más dosis/kg que adulto 70 kg</td></tr>
+          <tr><td style="padding:5px 8px;border:1px solid #e0e0e0;text-align:center;font-weight:700;">5</td><td style="padding:5px 8px;border:1px solid #e0e0e0;font-weight:600;">🥗 Nutrición</td><td style="padding:5px 8px;border:1px solid #e0e0e0;">Déficits de micronutrientes amplifican el daño</td><td style="padding:5px 8px;border:1px solid #e0e0e0;">Déficit de selenio y zinc amplifica daño hepático por aflatoxinas</td></tr>
+        </table>
+        <div style="margin-top:10px;"><strong>🚨 Grupos más vulnerables:</strong></div>
+        <table style="width:100%;border-collapse:collapse;font-size:12px;margin-top:6px;">
+          <tr style="background:#E6F1FB;">
+            <th style="padding:5px 8px;border:1px solid #d0d0d0;">Grupo</th>
+            <th style="padding:5px 8px;border:1px solid #d0d0d0;">Razón biológica</th>
+            <th style="padding:5px 8px;border:1px solid #d0d0d0;">Tóxicos de mayor riesgo</th>
+          </tr>
+          <tr><td style="padding:5px 8px;border:1px solid #e0e0e0;font-weight:600;">👶 Niños &lt;5 años</td><td style="padding:5px 8px;border:1px solid #e0e0e0;">SNC en desarrollo, mayor absorción relativa, menor detoxificación hepática</td><td style="padding:5px 8px;border:1px solid #e0e0e0;">Plomo · mercurio · pesticidas · aflatoxinas</td></tr>
+          <tr style="background:#f9f9f9;"><td style="padding:5px 8px;border:1px solid #e0e0e0;font-weight:600;">🤰 Embarazadas</td><td style="padding:5px 8px;border:1px solid #e0e0e0;">El tóxico puede cruzar la barrera placentaria y afectar al feto</td><td style="padding:5px 8px;border:1px solid #e0e0e0;">Mercurio orgánico · listeria · alcohol · aflatoxinas</td></tr>
+          <tr><td style="padding:5px 8px;border:1px solid #e0e0e0;font-weight:600;">👴 Adultos mayores</td><td style="padding:5px 8px;border:1px solid #e0e0e0;">Disminución de función renal, hepática e inmune</td><td style="padding:5px 8px;border:1px solid #e0e0e0;">Metales pesados · micotoxinas · plaguicidas</td></tr>
+          <tr style="background:#f9f9f9;"><td style="padding:5px 8px;border:1px solid #e0e0e0;font-weight:600;">😔 Desnutridos</td><td style="padding:5px 8px;border:1px solid #e0e0e0;">Déficits enzimáticos reducen la detoxificación metabólica</td><td style="padding:5px 8px;border:1px solid #e0e0e0;">Todos los tóxicos — efecto amplificado</td></tr>
+        </table>
+      </div>
     </div>
   </div>
 
@@ -269,7 +327,31 @@ input[type=range]{flex:1;height:4px;accent-color:var(--blue-400);cursor:pointer;
     <div class="detail-inner">
       <div class="detail-title">Integración de los 3 pasos anteriores</div>
       <div class="detail-text">Se estima la probabilidad real de daño para esa persona con esa exposición a esa sustancia. El manejo del riesgo traduce esto en acción: LMR, regulación de aditivos, recomendaciones nutricionales, educación sanitaria.</div>
-      <div class="detail-example"><strong>Rol del nutricionista 👩‍⚕️:</strong> Traducir la evaluación de riesgo en consejos prácticos — elegir métodos de cocción seguros 🍳, seleccionar alimentos con bajo perfil toxicológico 🥦, educar sobre inocuidad alimentaria 📋.</div>
+      <div class="detail-example">
+        <strong>👩‍⚕️ Rol del nutricionista en el manejo del riesgo:</strong>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:6px;margin-top:8px;font-size:12px;">
+          <div style="background:var(--bg-primary);border-radius:6px;padding:7px 10px;border:0.5px solid var(--border);display:flex;gap:7px;align-items:flex-start;"><span>🔍</span><div><strong style="display:block;margin-bottom:1px;">Identificar riesgos</strong>Detectar patrones de consumo riesgosos y comunicarlos con claridad.</div></div>
+          <div style="background:var(--bg-primary);border-radius:6px;padding:7px 10px;border:0.5px solid var(--border);display:flex;gap:7px;align-items:flex-start;"><span>📋</span><div><strong style="display:block;margin-bottom:1px;">Notificar al VETA</strong>Ante brotes: llenar formularios IAPs y notificar al sistema SISVIG de Panamá.</div></div>
+          <div style="background:var(--bg-primary);border-radius:6px;padding:7px 10px;border:0.5px solid var(--border);display:flex;gap:7px;align-items:flex-start;"><span>🥗</span><div><strong style="display:block;margin-bottom:1px;">Dietas seguras</strong>Seleccionar alimentos, cocciones y frecuencias que minimicen la exposición.</div></div>
+          <div style="background:var(--bg-primary);border-radius:6px;padding:7px 10px;border:0.5px solid var(--border);display:flex;gap:7px;align-items:flex-start;"><span>📚</span><div><strong style="display:block;margin-bottom:1px;">Educar</strong>Enseñar lavado correcto, almacenamiento seguro e interpretación de etiquetas.</div></div>
+          <div style="background:var(--bg-primary);border-radius:6px;padding:7px 10px;border:0.5px solid var(--border);display:flex;gap:7px;align-items:flex-start;grid-column:span 2;"><span>🏛️</span><div><strong style="display:block;margin-bottom:1px;">Políticas de inocuidad</strong>Contribuir al diseño de normas sanitarias, HACCP, evaluación de aditivos y control de LMR.</div></div>
+        </div>
+        <div style="margin-top:10px;"><strong>🧪 Los 5 contaminantes clave — fuente, efecto y consejo:</strong></div>
+        <table style="width:100%;border-collapse:collapse;font-size:11.5px;margin-top:6px;">
+          <tr style="background:#E6F1FB;">
+            <th style="padding:5px 6px;border:1px solid #d0d0d0;"></th>
+            <th style="padding:5px 6px;border:1px solid #d0d0d0;">Contaminante</th>
+            <th style="padding:5px 6px;border:1px solid #d0d0d0;">Fuente principal</th>
+            <th style="padding:5px 6px;border:1px solid #d0d0d0;">Efecto / Riesgo</th>
+            <th style="padding:5px 6px;border:1px solid #d0d0d0;">Consejo práctico</th>
+          </tr>
+          <tr><td style="padding:5px 6px;border:1px solid #e0e0e0;text-align:center;font-size:18px;">🥩</td><td style="padding:5px 6px;border:1px solid #e0e0e0;font-weight:600;">Nitrosaminas</td><td style="padding:5px 6px;border:1px solid #e0e0e0;">Embutidos, carnes curadas, nitritos + calor</td><td style="padding:5px 6px;border:1px solid #e0e0e0;color:#A32D2D;">Cancerígenas en tracto digestivo. Grupo 2A IARC. Potenciadas por tabaco.</td><td style="padding:5px 6px;border:1px solid #e0e0e0;color:#3B6D11;">Consumo ocasional. No quemar. Evitar tabaco.</td></tr>
+          <tr style="background:#f9f9f9;"><td style="padding:5px 6px;border:1px solid #e0e0e0;text-align:center;font-size:18px;">🍟</td><td style="padding:5px 6px;border:1px solid #e0e0e0;font-weight:600;">Acrilamida</td><td style="padding:5px 6px;border:1px solid #e0e0e0;">Papas fritas, pan tostado oscuro &gt;120 °C</td><td style="padding:5px 6px;border:1px solid #e0e0e0;color:#A32D2D;">Mutágena. Probable cancerígena Grupo 2A IARC.</td><td style="padding:5px 6px;border:1px solid #e0e0e0;color:#3B6D11;">Freír a menor T°. Evitar dorado oscuro. Remojar papas (−40 %).</td></tr>
+          <tr><td style="padding:5px 6px;border:1px solid #e0e0e0;text-align:center;font-size:18px;">🌽</td><td style="padding:5px 6px;border:1px solid #e0e0e0;font-weight:600;">Aflatoxinas B1</td><td style="padding:5px 6px;border:1px solid #e0e0e0;">Maíz, maní, cereales con humedad &gt;14 %</td><td style="padding:5px 6px;border:1px solid #e0e0e0;color:#A32D2D;">Cancerígeno Grupo 1 IARC. Hepatotóxica. Termoestable — NO se elimina cocinando.</td><td style="padding:5px 6px;border:1px solid #e0e0e0;color:#3B6D11;">Desechar si hay moho. Almacenar en seco. Tolerancia cero infantil.</td></tr>
+          <tr style="background:#f9f9f9;"><td style="padding:5px 6px;border:1px solid #e0e0e0;text-align:center;font-size:18px;">🌿</td><td style="padding:5px 6px;border:1px solid #e0e0e0;font-weight:600;">Plaguicidas organofosfora­dos</td><td style="padding:5px 6px;border:1px solid #e0e0e0;">Frutas/verduras con período de carencia incumplido</td><td style="padding:5px 6px;border:1px solid #e0e0e0;color:#A32D2D;">Inhiben colinesterasa. Aguda: miosis, salivación. Crónica: neurotoxicidad.</td><td style="padding:5px 6px;border:1px solid #e0e0e0;color:#3B6D11;">Lavar + pelar. Exigir BPA. Biomarcador: colinesterasa sérica.</td></tr>
+          <tr><td style="padding:5px 6px;border:1px solid #e0e0e0;text-align:center;font-size:18px;">🐟</td><td style="padding:5px 6px;border:1px solid #e0e0e0;font-weight:600;">Mercurio orgánico (metilHg)</td><td style="padding:5px 6px;border:1px solid #e0e0e0;">Atún, pez espada, tiburón</td><td style="padding:5px 6px;border:1px solid #e0e0e0;color:#A32D2D;">Bioacumulación. Atraviesa placenta. Daño neurológico fetal.</td><td style="padding:5px 6px;border:1px solid #e0e0e0;color:#3B6D11;">Emb./niños: máx. 2×/semana. Preferir sardinas o salmón.</td></tr>
+        </table>
+      </div>
     </div>
   </div>
 </div>
@@ -514,10 +596,60 @@ input[type=range]{flex:1;height:4px;accent-color:var(--blue-400);cursor:pointer;
   </div>
 </div>
 
+
 <div class="divider"></div>
+
+<!-- GLOSARIO -->
+<div class="section">
+  <p class="section-label">glosario de términos clave · referencia rápida</p>
+  <div id="glos-list">
+    <div onclick="toggleGlos(0)" id="gt-0" style="display:flex;cursor:pointer;margin-bottom:5px;border-radius:var(--radius-md);overflow:hidden;border:0.5px solid var(--border);">
+      <div style="background:var(--blue-50);padding:9px 12px;font-size:12px;font-weight:700;color:var(--blue-800);min-width:130px;display:flex;align-items:center;">DL50</div>
+      <div style="padding:9px 12px;font-size:12.5px;background:var(--bg-primary);flex:1;line-height:1.5;">Dosis que causa la muerte al 50 % de los animales de prueba. Menor número = mayor toxicidad. Botulina: 0.001 · Sal: 3 000 mg/kg. Misma unidad, mundos distintos de peligro.</div>
+    </div>
+    <div onclick="toggleGlos(1)" id="gt-1" style="display:flex;cursor:pointer;margin-bottom:5px;border-radius:var(--radius-md);overflow:hidden;border:0.5px solid var(--border);">
+      <div style="background:var(--blue-50);padding:9px 12px;font-size:12px;font-weight:700;color:var(--blue-800);min-width:130px;display:flex;align-items:center;">LMR</div>
+      <div style="padding:9px 12px;font-size:12.5px;background:var(--bg-primary);flex:1;line-height:1.5;">Límite Máximo de Residuos. Concentración máxima legal de un plaguicida en un alimento (mg/kg), basada en Buenas Prácticas Agrícolas. Si el residuo está por debajo, el alimento es legalmente seguro.</div>
+    </div>
+    <div onclick="toggleGlos(2)" id="gt-2" style="display:flex;cursor:pointer;margin-bottom:5px;border-radius:var(--radius-md);overflow:hidden;border:0.5px solid var(--border);">
+      <div style="background:var(--blue-50);padding:9px 12px;font-size:12px;font-weight:700;color:var(--blue-800);min-width:130px;display:flex;align-items:center;">Período de carencia</div>
+      <div style="padding:9px 12px;font-size:12.5px;background:var(--bg-primary);flex:1;line-height:1.5;">Días que deben pasar entre la última aplicación del plaguicida y la cosecha del alimento. Si no se respeta, el residuo supera el LMR y el alimento representa un riesgo de intoxicación aguda.</div>
+    </div>
+    <div onclick="toggleGlos(3)" id="gt-3" style="display:flex;cursor:pointer;margin-bottom:5px;border-radius:var(--radius-md);overflow:hidden;border:0.5px solid var(--border);">
+      <div style="background:var(--blue-50);padding:9px 12px;font-size:12px;font-weight:700;color:var(--blue-800);min-width:130px;display:flex;align-items:center;">Acrilamida</div>
+      <div style="padding:9px 12px;font-size:12.5px;background:var(--bg-primary);flex:1;line-height:1.5;">Compuesto que se forma al calentar almidón a más de 120 °C (reacción de Maillard). No es un aditivo: nace en tu cocina al freír papas o tostar pan. Probable cancerígeno Grupo 2A (IARC).</div>
+    </div>
+    <div onclick="toggleGlos(4)" id="gt-4" style="display:flex;cursor:pointer;margin-bottom:5px;border-radius:var(--radius-md);overflow:hidden;border:0.5px solid var(--border);">
+      <div style="background:var(--blue-50);padding:9px 12px;font-size:12px;font-weight:700;color:var(--blue-800);min-width:130px;display:flex;align-items:center;">Aflatoxina B1</div>
+      <div style="padding:9px 12px;font-size:12.5px;background:var(--bg-primary);flex:1;line-height:1.5;">Micotoxina del hongo Aspergillus. Cancerígeno Grupo 1 IARC. Termoestable: cocinar no la elimina. Afecta principalmente el hígado. DL50 = 0.3 mg/kg. Tolerancia cero en alimentos infantiles.</div>
+    </div>
+    <div onclick="toggleGlos(5)" id="gt-5" style="display:flex;cursor:pointer;margin-bottom:5px;border-radius:var(--radius-md);overflow:hidden;border:0.5px solid var(--border);">
+      <div style="background:var(--blue-50);padding:9px 12px;font-size:12px;font-weight:700;color:var(--blue-800);min-width:130px;display:flex;align-items:center;">Bioacumulación</div>
+      <div style="padding:9px 12px;font-size:12.5px;background:var(--bg-primary);flex:1;line-height:1.5;">Acumulación progresiva de una sustancia en tejidos vivos. El mercurio se concentra ×10 en cada eslabón de la cadena alimentaria. A esto se le llama biomagnificación.</div>
+    </div>
+    <div onclick="toggleGlos(6)" id="gt-6" style="display:flex;cursor:pointer;margin-bottom:5px;border-radius:var(--radius-md);overflow:hidden;border:0.5px solid var(--border);">
+      <div style="background:var(--blue-50);padding:9px 12px;font-size:12px;font-weight:700;color:var(--blue-800);min-width:130px;display:flex;align-items:center;">Sinergia tóxica</div>
+      <div style="padding:9px 12px;font-size:12.5px;background:var(--bg-primary);flex:1;line-height:1.5;">Cuando dos sustancias juntas producen MÁS daño del que producirían por separado. Alcohol + aflatoxinas → mayor daño hepático. Tabaco + nitrosaminas → mayor carcinogénesis digestiva.</div>
+    </div>
+    <div onclick="toggleGlos(7)" id="gt-7" style="display:flex;cursor:pointer;margin-bottom:5px;border-radius:var(--radius-md);overflow:hidden;border:0.5px solid var(--border);">
+      <div style="background:var(--blue-50);padding:9px 12px;font-size:12px;font-weight:700;color:var(--blue-800);min-width:130px;display:flex;align-items:center;">VETA</div>
+      <div style="padding:9px 12px;font-size:12.5px;background:var(--bg-primary);flex:1;line-height:1.5;">Sistema panameño de Vigilancia Epidemiológica de Enfermedades Transmitidas por Alimentos. Ante un brote (2 o más casos relacionados), la notificación es inmediata mediante el formulario de notificación obligatoria.</div>
+    </div>
+    <div onclick="toggleGlos(8)" id="gt-8" style="display:flex;cursor:pointer;margin-bottom:5px;border-radius:var(--radius-md);overflow:hidden;border:0.5px solid var(--border);">
+      <div style="background:var(--blue-50);padding:9px 12px;font-size:12px;font-weight:700;color:var(--blue-800);min-width:130px;display:flex;align-items:center;">Xenobiótico</div>
+      <div style="padding:9px 12px;font-size:12.5px;background:var(--bg-primary);flex:1;line-height:1.5;">Cualquier sustancia química extraña al organismo, de origen natural o sintético. La clave no está en el origen, sino en la dosis y la frecuencia de exposición.</div>
+    </div>
+    <div onclick="toggleGlos(9)" id="gt-9" style="display:flex;cursor:pointer;margin-bottom:5px;border-radius:var(--radius-md);overflow:hidden;border:0.5px solid var(--border);">
+      <div style="background:var(--blue-50);padding:9px 12px;font-size:12px;font-weight:700;color:var(--blue-800);min-width:130px;display:flex;align-items:center;">Caracterización del riesgo</div>
+      <div style="padding:9px 12px;font-size:12.5px;background:var(--bg-primary);flex:1;line-height:1.5;">Integración de los 4 pasos: une el peligro + la dosis + la exposición para estimar si hay daño real y para quién. Es la base de toda recomendación nutricional preventiva en toxicología de alimentos.</div>
+    </div>
+  </div>
+</div>
+
 <div class="footer">
   <p>🌍 Toxicología de los Alimentos · Licenciatura en Nutrición y Dietética</p>
   <p style="margin-top:4px;">Día Mundial de la Inocuidad de los Alimentos · Feria Educativa Interactiva</p>
+  <p style="margin-top:4px;">Evidencia científica: OMS · IARC · EFSA · FAO · Normativa MINSA Panamá</p>
 </div>
 
 </div>
@@ -616,6 +748,14 @@ function nextDato(){
   datoIdx=(datoIdx+1)%datos.length;
   document.getElementById('dato-icon').textContent=datos[datoIdx].icon;
   document.getElementById('dato-text').innerHTML=datos[datoIdx].text;
+}
+
+/* ─── Glosario toggle (highlight on click) ─── */
+function toggleGlos(n){
+  const el=document.getElementById('gt-'+n);
+  const isActive=el.style.background==='var(--blue-50)';
+  document.querySelectorAll('[id^="gt-"]').forEach(e=>e.style.background='');
+  if(!isActive) el.style.background='var(--blue-50)';
 }
 
 /* ─── Casos ─── */
