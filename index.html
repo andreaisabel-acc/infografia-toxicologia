@@ -174,38 +174,30 @@ input[type=range]{flex:1;height:4px;accent-color:var(--blue-400);cursor:pointer;
   .sinergia-grid{grid-template-columns:repeat(2,1fr);}
   .contam-grid{grid-template-columns:repeat(2,1fr);}
 }
+
+/* ── BOTÓN PDF ── */
+.pdf-btn{
+  position:fixed;bottom:24px;right:24px;
+  background:#185FA5;color:#fff;
+  border:none;border-radius:50px;
+  padding:12px 20px;font-size:13px;font-weight:600;
+  cursor:pointer;display:flex;align-items:center;gap:8px;
+  box-shadow:0 4px 16px rgba(0,0,0,.22);
+  font-family:inherit;z-index:999;
+  transition:background .15s,transform .15s;
+}
+.pdf-btn:hover{background:#0C447C;transform:translateY(-2px);}
+@media print{.pdf-btn{display:none;}}
 </style>
 </head>
 <body>
-<div class="wrap">
+<div class="wrap" id="pdf-root">
 
 <!-- HEADER -->
 <div class="header">
   <div class="badge">🔬 toxicología de los alimentos</div>
   <h1>¿Qué tan seguro es lo que comemos?</h1>
-  <p>Evaluación de riesgos por agentes químicos · Explora, aprende y pon a prueba tu conocimiento</p>
-  <div class="header-icons">
-    <div class="hico">
-      <svg viewBox="0 0 36 36" fill="none"><circle cx="18" cy="18" r="17" fill="#EAF3DE" stroke="#639922" stroke-width="1.5"/><text x="18" y="23" text-anchor="middle" font-size="18">🌽</text></svg>
-      <span>Alimentos</span>
-    </div>
-    <div class="hico">
-      <svg viewBox="0 0 36 36" fill="none"><circle cx="18" cy="18" r="17" fill="#FAEEDA" stroke="#BA7517" stroke-width="1.5"/><text x="18" y="23" text-anchor="middle" font-size="18">⚗️</text></svg>
-      <span>Tóxicos</span>
-    </div>
-    <div class="hico">
-      <svg viewBox="0 0 36 36" fill="none"><circle cx="18" cy="18" r="17" fill="#E6F1FB" stroke="#378ADD" stroke-width="1.5"/><text x="18" y="23" text-anchor="middle" font-size="18">🧬</text></svg>
-      <span>ADN</span>
-    </div>
-    <div class="hico">
-      <svg viewBox="0 0 36 36" fill="none"><circle cx="18" cy="18" r="17" fill="#FCEBEB" stroke="#E24B4A" stroke-width="1.5"/><text x="18" y="23" text-anchor="middle" font-size="18">🛡️</text></svg>
-      <span>Prevención</span>
-    </div>
-    <div class="hico">
-      <svg viewBox="0 0 36 36" fill="none"><circle cx="18" cy="18" r="17" fill="#EAF3DE" stroke="#1D9E75" stroke-width="1.5"/><text x="18" y="23" text-anchor="middle" font-size="18">👩‍⚕️</text></svg>
-      <span>Nutrición</span>
-    </div>
-  </div>
+  <p style="font-size:14px;color:var(--text-secondary);max-width:540px;margin:0 auto;line-height:1.65;">La inocuidad alimentaria es responsabilidad de todos. Conocer los riesgos químicos y cancerígenos presentes en los alimentos nos permite tomar decisiones más seguras para proteger la salud.</p>
 </div>
 
 <!-- MÉTRICAS -->
@@ -605,7 +597,7 @@ input[type=range]{flex:1;height:4px;accent-color:var(--blue-400);cursor:pointer;
   <div id="glos-list">
     <div onclick="toggleGlos(0)" id="gt-0" style="display:flex;cursor:pointer;margin-bottom:5px;border-radius:var(--radius-md);overflow:hidden;border:0.5px solid var(--border);">
       <div style="background:var(--blue-50);padding:9px 12px;font-size:12px;font-weight:700;color:var(--blue-800);min-width:130px;display:flex;align-items:center;">DL50</div>
-      <div style="padding:9px 12px;font-size:12.5px;background:var(--bg-primary);flex:1;line-height:1.5;">Dosis que causa la muerte al 50 % de los animales de prueba. Menor número = mayor toxicidad. Botulina: 0.001 · Sal: 3 000 mg/kg. Misma unidad, mundos distintos de peligro.</div>
+      <div style="padding:9px 12px;font-size:12.5px;background:var(--bg-primary);flex:1;line-height:1.6;">Es la cantidad de una sustancia que mata al 50 % de los animales de prueba. Se mide en mg por kg de peso corporal. <strong>Regla fácil: número más pequeño = más peligroso.</strong> Imagina que tienes dos venenos: uno con DL50 = 1 y otro con DL50 = 1 000. El primero necesita poquísimo para matar; el segundo necesita muchísimo más. La toxina botulínica tiene DL50 = 0.001 mg/kg (extremadamente peligrosa) y la sal de mesa tiene DL50 = 3 000 mg/kg (prácticamente no tóxica en dosis normales). Son la misma unidad, pero eso equivale a que la botulina es <strong>3 000 000 veces más tóxica</strong> que la sal.</div>
     </div>
     <div onclick="toggleGlos(1)" id="gt-1" style="display:flex;cursor:pointer;margin-bottom:5px;border-radius:var(--radius-md);overflow:hidden;border:0.5px solid var(--border);">
       <div style="background:var(--blue-50);padding:9px 12px;font-size:12px;font-weight:700;color:var(--blue-800);min-width:130px;display:flex;align-items:center;">LMR</div>
@@ -763,6 +755,57 @@ const casoTabs=document.querySelectorAll('.caso-tab');
 function selectCaso(n){
   casoTabs.forEach((t,i)=>t.classList.toggle('active',i===n));
   document.querySelectorAll('.caso-content').forEach((c,i)=>c.classList.toggle('show',i===n));
+}
+</script>
+
+<!-- html2pdf desde CDN -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+
+<button class="pdf-btn" onclick="downloadPDF()" id="pdf-btn" title="Descargar como PDF">
+  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="12" y1="18" x2="12" y2="12"/><line x1="9" y1="15" x2="15" y2="15"/></svg>
+  <span id="pdf-label">Descargar PDF</span>
+</button>
+
+<script>
+function downloadPDF(){
+  const btn  = document.getElementById('pdf-btn');
+  const lbl  = document.getElementById('pdf-label');
+
+  // Estado de carga
+  btn.disabled = true;
+  lbl.textContent = 'Generando…';
+
+  // Expandir todo antes de capturar
+  for(let i=0;i<4;i++){
+    document.getElementById('pd-'+i).classList.add('show');
+    document.getElementById('pbtn-'+i).classList.add('active');
+  }
+  document.getElementById('cd-panel').classList.add('show');
+  document.querySelectorAll('.caso-content').forEach(c=>c.classList.add('show'));
+
+  // Ocultar botón del PDF en la captura
+  btn.style.visibility = 'hidden';
+
+  const el = document.getElementById('pdf-root');
+
+  const opt = {
+    margin:       [8, 8, 8, 8],
+    filename:     'Infografia_Toxicologia_Alimentos.pdf',
+    image:        { type: 'jpeg', quality: 0.97 },
+    html2canvas:  { scale: 2, useCORS: true, letterRendering: true },
+    jsPDF:        { unit: 'mm', format: 'a4', orientation: 'portrait' },
+    pagebreak:    { mode: ['avoid-all', 'css', 'legacy'] }
+  };
+
+  html2pdf()
+    .set(opt)
+    .from(el)
+    .save()
+    .then(() => {
+      btn.style.visibility = 'visible';
+      btn.disabled = false;
+      lbl.textContent = 'Descargar PDF';
+    });
 }
 </script>
 </body>
